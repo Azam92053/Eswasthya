@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.eswasthya.desktop.controller.AdminUsersController"
+      spacing="18" styleClass="page-root">
+
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <Label text="All Users" styleClass="page-title" HBox.hgrow="ALWAYS"/>
+        <Label fx:id="countLabel" styleClass="badge-muted"/>
+        <Button text="↻ Refresh" styleClass="btn-secondary" onAction="#handleRefresh"/>
+    </HBox>
+
+    <!-- Filters -->
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField" styleClass="text-field-custom"
+                   promptText="🔍  Search by name, username or email…" prefWidth="340"/>
+        <ComboBox fx:id="roleFilter" styleClass="combo-custom" prefWidth="140"/>
+    </HBox>
+
+    <Label fx:id="errorLabel" styleClass="error-label" wrapText="true"/>
+    <VBox fx:id="loadingBox" alignment="CENTER" spacing="10" prefHeight="80">
+        <ProgressIndicator prefWidth="28" prefHeight="28"/>
+        <Label text="Loading users…" styleClass="text-muted"/>
+    </VBox>
+
+    <TableView fx:id="userTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+        <columns>
+            <TableColumn fx:id="colName"     text="Full Name"   prefWidth="160"/>
+            <TableColumn fx:id="colUsername" text="Username"    prefWidth="130"/>
+            <TableColumn fx:id="colEmail"    text="Email"       prefWidth="200"/>
+            <TableColumn fx:id="colAge"      text="Age"         prefWidth="60"/>
+            <TableColumn fx:id="colGender"   text="Gender"      prefWidth="80"/>
+            <TableColumn fx:id="colRole"     text="Role"        prefWidth="100"/>
+            <TableColumn fx:id="colJoined"   text="Joined"      prefWidth="100"/>
+        </columns>
+    </TableView>
+</VBox>

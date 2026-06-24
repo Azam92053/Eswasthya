@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<HBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.eswasthya.desktop.controller.LoginController"
+      styleClass="root-pane">
+
+    <!-- Left branding panel -->
+    <VBox styleClass="brand-panel" HBox.hgrow="ALWAYS" alignment="CENTER" spacing="20">
+        <padding><Insets top="60" right="60" bottom="60" left="60"/></padding>
+        <Label text="🫀" styleClass="brand-icon"/>
+        <Label text="eSwasthya" styleClass="brand-title"/>
+        <Label text="Health Portal" styleClass="brand-subtitle"/>
+        <Label text="Track your BMI, blood pressure,&#10;glucose and activity levels.&#10;Get instant health alerts." 
+               styleClass="brand-desc" textAlignment="CENTER" wrapText="true"/>
+    </VBox>
+
+    <!-- Right login form -->
+    <VBox styleClass="auth-form-panel" alignment="CENTER" spacing="0" minWidth="420">
+        <padding><Insets top="60" right="60" bottom="60" left="60"/></padding>
+
+        <Label text="Sign in" styleClass="form-title"/>
+        <Label text="Welcome back. Enter your credentials." styleClass="form-subtitle"/>
+
+        <VBox spacing="14" style="-fx-padding: 32 0 0 0;">
+            <VBox spacing="6">
+                <Label text="USERNAME" styleClass="field-label"/>
+                <TextField fx:id="usernameField" styleClass="text-field-custom" promptText="your_username"/>
+            </VBox>
+            <VBox spacing="6">
+                <Label text="PASSWORD" styleClass="field-label"/>
+                <PasswordField fx:id="passwordField" styleClass="text-field-custom" promptText="••••••••"/>
+            </VBox>
+
+            <Label fx:id="errorLabel" styleClass="error-label" wrapText="true"/>
+
+            <HBox alignment="CENTER" style="-fx-padding: 4 0 0 0;">
+                <ProgressIndicator fx:id="spinner" prefWidth="20" prefHeight="20"/>
+            </HBox>
+
+            <Button fx:id="loginButton" text="Sign in →" styleClass="btn-primary"
+                    maxWidth="Infinity" onAction="#handleLogin"/>
+
+            <HBox alignment="CENTER" spacing="6" style="-fx-padding: 16 0 0 0;">
+                <Label text="New to eSwasthya?" styleClass="text-muted"/>
+                <Hyperlink fx:id="registerLink" text="Create an account" 
+                           styleClass="link" onAction="#handleRegisterLink"/>
+            </HBox>
+        </VBox>
+    </VBox>
+</HBox>

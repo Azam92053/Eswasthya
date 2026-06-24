@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.eswasthya.desktop.controller.AlertsController"
+      spacing="18" styleClass="page-root">
+
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <Label text="Health Alerts" styleClass="page-title" HBox.hgrow="ALWAYS"/>
+        <Label fx:id="totalLabel"  styleClass="badge-muted"/>
+        <Label fx:id="unreadLabel" styleClass="badge-info"/>
+        <ToggleButton fx:id="toggleUnread" text="Unread only" styleClass="btn-secondary"/>
+        <Button text="↻ Refresh"   styleClass="btn-secondary" onAction="#handleRefresh"/>
+        <Button fx:id="btnMarkAll" text="✓ Mark all read" styleClass="btn-secondary" onAction="#handleMarkAll"/>
+    </HBox>
+
+    <Label fx:id="errorLabel" styleClass="error-label" wrapText="true"/>
+    <VBox fx:id="loadingBox" alignment="CENTER" spacing="10" prefHeight="80">
+        <ProgressIndicator prefWidth="28" prefHeight="28"/>
+        <Label text="Loading alerts…" styleClass="text-muted"/>
+    </VBox>
+
+    <TableView fx:id="alertTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+        <columns>
+            <TableColumn fx:id="colStatus"  text="Status"   prefWidth="90"/>
+            <TableColumn fx:id="colType"    text="Type"     prefWidth="180"/>
+            <TableColumn fx:id="colMessage" text="Message"  prefWidth="500"/>
+            <TableColumn fx:id="colDate"    text="Date"     prefWidth="100"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button fx:id="btnMarkRead" text="✓ Mark as read" styleClass="btn-secondary" onAction="#handleMarkRead"/>
+    </HBox>
+</VBox>

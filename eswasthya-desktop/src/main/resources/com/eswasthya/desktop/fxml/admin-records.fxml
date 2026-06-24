@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.eswasthya.desktop.controller.AdminRecordsController"
+      spacing="18" styleClass="page-root">
+
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <Label text="All Health Records" styleClass="page-title" HBox.hgrow="ALWAYS"/>
+        <Label fx:id="countLabel" styleClass="badge-muted"/>
+        <Button text="↻ Refresh" styleClass="btn-secondary" onAction="#handleRefresh"/>
+    </HBox>
+
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField" styleClass="text-field-custom"
+                   promptText="🔍  Search by user name or date…" prefWidth="360"/>
+    </HBox>
+
+    <Label fx:id="errorLabel" styleClass="error-label" wrapText="true"/>
+    <VBox fx:id="loadingBox" alignment="CENTER" spacing="10" prefHeight="80">
+        <ProgressIndicator prefWidth="28" prefHeight="28"/>
+        <Label text="Loading records…" styleClass="text-muted"/>
+    </VBox>
+
+    <TableView fx:id="recordTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+        <columns>
+            <TableColumn fx:id="colDate"     text="Date"           prefWidth="110"/>
+            <TableColumn fx:id="colUser"     text="User"           prefWidth="150"/>
+            <TableColumn fx:id="colBmi"      text="BMI"            prefWidth="80"/>
+            <TableColumn fx:id="colBmiCat"   text="BMI Category"   prefWidth="130"/>
+            <TableColumn fx:id="colBp"       text="Blood Pressure" prefWidth="140"/>
+            <TableColumn fx:id="colGlucose"  text="Glucose"        prefWidth="120"/>
+            <TableColumn fx:id="colActivity" text="Activity"       prefWidth="100"/>
+        </columns>
+    </TableView>
+</VBox>

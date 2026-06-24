@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.eswasthya.desktop.controller.HealthRecordsController"
+      spacing="18" styleClass="page-root">
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <Label text="Health Records" styleClass="page-title" HBox.hgrow="ALWAYS"/>
+        <Label fx:id="recordCountLabel" styleClass="badge-muted"/>
+        <Button text="↻ Refresh" styleClass="btn-secondary" onAction="#handleRefresh"/>
+        <Button text="↓ Report"  styleClass="btn-secondary" fx:id="btnDownload" onAction="#handleDownload"/>
+        <Button text="＋ New Record" styleClass="btn-primary" fx:id="btnNew" onAction="#handleNew"/>
+    </HBox>
+
+    <Label fx:id="errorLabel" styleClass="error-label" wrapText="true"/>
+
+    <VBox fx:id="loadingBox" alignment="CENTER" spacing="10" prefHeight="80">
+        <ProgressIndicator prefWidth="28" prefHeight="28"/>
+        <Label text="Loading records…" styleClass="text-muted"/>
+    </VBox>
+
+    <!-- Table -->
+    <TableView fx:id="recordTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+        <columns>
+            <TableColumn fx:id="colDate"     text="Date"          prefWidth="100"/>
+            <TableColumn fx:id="colBmi"      text="BMI"           prefWidth="70"/>
+            <TableColumn fx:id="colBmiCat"   text="BMI Category"  prefWidth="120"/>
+            <TableColumn fx:id="colBp"       text="Blood Pressure" prefWidth="130"/>
+            <TableColumn fx:id="colGlucose"  text="Glucose"       prefWidth="110"/>
+            <TableColumn fx:id="colActivity" text="Activity"      prefWidth="100"/>
+            <TableColumn fx:id="colNotes"    text="Notes"         prefWidth="200"/>
+        </columns>
+    </TableView>
+
+    <!-- Action bar -->
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button fx:id="btnEdit"   text="✎ Edit"   styleClass="btn-secondary" onAction="#handleEdit"/>
+        <Button fx:id="btnDelete" text="✕ Delete" styleClass="btn-danger"    onAction="#handleDelete"/>
+    </HBox>
+</VBox>

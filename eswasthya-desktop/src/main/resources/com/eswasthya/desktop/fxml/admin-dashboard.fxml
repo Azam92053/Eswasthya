@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.eswasthya.desktop.controller.AdminDashboardController"
+            fitToWidth="true" styleClass="scroll-content">
+
+    <VBox spacing="20">
+        <HBox alignment="CENTER_LEFT">
+            <Label text="Admin Dashboard" styleClass="page-title" HBox.hgrow="ALWAYS"/>
+            <Button text="↻ Refresh" styleClass="btn-secondary" onAction="#handleRefresh"/>
+        </HBox>
+
+        <VBox fx:id="loadingBox" alignment="CENTER" spacing="10" prefHeight="80">
+            <ProgressIndicator prefWidth="28" prefHeight="28"/>
+            <Label text="Loading statistics…" styleClass="text-muted"/>
+        </VBox>
+        <Label fx:id="errorLabel" styleClass="error-label" wrapText="true"/>
+
+        <!-- Stat cards -->
+        <HBox spacing="14">
+            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+                <Label text="TOTAL USERS"    styleClass="stat-label"/>
+                <Label fx:id="totalUsersLabel"   text="—" styleClass="stat-value"/>
+            </VBox>
+            <VBox styleClass="stat-card,stat-card-green" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+                <Label text="HEALTH RECORDS" styleClass="stat-label"/>
+                <Label fx:id="totalRecordsLabel" text="—" styleClass="stat-value"/>
+            </VBox>
+            <VBox styleClass="stat-card,stat-card-alert" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+                <Label text="UNREAD ALERTS"  styleClass="stat-label"/>
+                <Label fx:id="unreadAlertsLabel" text="—" styleClass="stat-value"/>
+            </VBox>
+            <VBox styleClass="stat-card,stat-card-amber" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+                <Label text="AVG BMI"         styleClass="stat-label"/>
+                <Label fx:id="avgBmiLabel"       text="—" styleClass="stat-value"/>
+            </VBox>
+            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+                <Label text="AVG GLUCOSE"     styleClass="stat-label"/>
+                <Label fx:id="avgGlucoseLabel"   text="—" styleClass="stat-value"/>
+            </VBox>
+        </HBox>
+
+        <!-- Charts -->
+        <HBox spacing="14">
+            <VBox styleClass="card" HBox.hgrow="ALWAYS" spacing="8" maxWidth="Infinity">
+                <padding><Insets topRightBottomLeft="16"/></padding>
+                <Label text="Users by Role" styleClass="section-title"/>
+                <BarChart fx:id="userRoleChart" prefHeight="220" animated="false" legendVisible="false">
+                    <xAxis><CategoryAxis/></xAxis>
+                    <yAxis><NumberAxis autoRanging="true"/></yAxis>
+                </BarChart>
+            </VBox>
+            <VBox styleClass="card" HBox.hgrow="ALWAYS" spacing="8" maxWidth="Infinity">
+                <padding><Insets topRightBottomLeft="16"/></padding>
+                <Label text="Alert Distribution" styleClass="section-title"/>
+                <PieChart fx:id="alertTypeChart" prefHeight="220" animated="false" legendVisible="true"/>
+            </VBox>
+        </HBox>
+
+        <!-- User summary table -->
+        <VBox styleClass="card" spacing="10">
+            <padding><Insets topRightBottomLeft="16"/></padding>
+            <Label text="User Health Overview" styleClass="section-title"/>
+            <TableView fx:id="summaryTable" prefHeight="280" styleClass="data-table">
+                <columns>
+                    <TableColumn fx:id="colName"    text="Name"          prefWidth="160"/>
+                    <TableColumn fx:id="colRole"    text="Role"          prefWidth="100"/>
+                    <TableColumn fx:id="colRecords" text="Records"       prefWidth="80"/>
+                    <TableColumn fx:id="colBmi"     text="Latest BMI"    prefWidth="100"/>
+                    <TableColumn fx:id="colBmiCat"  text="BMI Status"    prefWidth="120"/>
+                    <TableColumn fx:id="colUnread"  text="Unread Alerts" prefWidth="110"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </VBox>
+</ScrollPane>

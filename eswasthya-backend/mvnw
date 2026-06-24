@@ -1,0 +1,65 @@
+#!/bin/sh
+# ----------------------------------------------------------------------------
+# Maven Start Up Batch script
+# Licensed to the Apache Software Foundation (ASF)
+# ----------------------------------------------------------------------------
+
+if [ -z "$JAVA_HOME" ]; then
+  JAVACMD=`which java`
+  if [ -z "$JAVACMD" ]; then
+    echo "Error: JAVA_HOME is not set and java is not in PATH."
+    echo "Please set the JAVA_HOME variable pointing to your Java 17+ installation."
+    exit 1
+  fi
+else
+  JAVACMD="$JAVA_HOME/bin/java"
+  if [ ! -x "$JAVACMD" ]; then
+    echo "Error: JAVA_HOME is set to an invalid directory: $JAVA_HOME"
+    exit 1
+  fi
+fi
+
+# Detect the script's own directory
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+MAVEN_WRAPPER_PROPERTIES="$SCRIPT_DIR/.mvn/wrapper/maven-wrapper.properties"
+
+# Read distributionUrl from properties
+DISTRIBUTION_URL=$(grep "distributionUrl" "$MAVEN_WRAPPER_PROPERTIES" | sed 's/distributionUrl=//' | tr -d '\r')
+
+# Derive Maven home from URL filename
+MAVEN_ARCHIVE=$(basename "$DISTRIBUTION_URL")
+MAVEN_DIR="${MAVEN_ARCHIVE%-bin.zip}"
+M2_HOME="${HOME}/.m2/wrapper/dists/${MAVEN_DIR}"
+
+# Download Maven if not already cached
+if [ ! -d "$M2_HOME" ]; then
+  echo "Downloading Maven ${MAVEN_DIR} ..."
+  mkdir -p "$M2_HOME"
+  TMP_ZIP="${M2_HOME}/${MAVEN_ARCHIVE}"
+
+  # Try curl, then wget
+  if command -v curl > /dev/null 2>&1; then
+    curl -sL "$DISTRIBUTION_URL" -o "$TMP_ZIP"
+  elif command -v wget > /dev/null 2>&1; then
+    wget -q "$DISTRIBUTION_URL" -O "$TMP_ZIP"
+  else
+    echo "Error: Neither curl nor wget found. Please install one of them."
+    exit 1
+  fi
+
+  echo "Extracting Maven ..."
+  unzip -q "$TMP_ZIP" -d "$M2_HOME"
+  rm -f "$TMP_ZIP"
+  echo "Maven downloaded to: $M2_HOME"
+fi
+
+# Locate the mvn executable inside extracted directory
+MAVEN_BIN=$(find "$M2_HOME" -name "mvn" -type f | head -1)
+if [ -z "$MAVEN_BIN" ]; then
+  echo "Error: Could not find mvn executable in $M2_HOME"
+  exit 1
+fi
+chmod +x "$MAVEN_BIN"
+
+# Run Maven with all arguments passed to this script
+exec "$MAVEN_BIN" "$@"

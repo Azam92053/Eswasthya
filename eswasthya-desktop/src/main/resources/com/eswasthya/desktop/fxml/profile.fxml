@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.eswasthya.desktop.controller.ProfileController"
+            fitToWidth="true" styleClass="scroll-content">
+
+    <VBox spacing="20">
+        <Label text="My Profile" styleClass="page-title"/>
+
+        <!-- Avatar card -->
+        <VBox styleClass="card" spacing="12" maxWidth="Infinity">
+            <padding><Insets topRightBottomLeft="24"/></padding>
+            <HBox spacing="20" alignment="CENTER_LEFT">
+                <Label fx:id="initialLabel" styleClass="avatar-large"/>
+                <VBox spacing="4">
+                    <Label fx:id="nameLabel"     styleClass="profile-name"/>
+                    <Label fx:id="usernameLabel" styleClass="text-muted"/>
+                    <Label fx:id="roleLabel"     styleClass="badge-info"/>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnEdit" text="✎ Edit Profile" styleClass="btn-secondary" onAction="#handleEdit"/>
+                <Button fx:id="btnSave" text="✓ Save"          styleClass="btn-primary"   onAction="#handleSave"  visible="false"/>
+                <Button fx:id="btnCancel" text="✕ Cancel"      styleClass="btn-secondary" onAction="#handleCancel" visible="false"/>
+            </HBox>
+        </VBox>
+
+        <Label fx:id="errorLabel"   styleClass="error-label"   wrapText="true"/>
+        <Label fx:id="successLabel" styleClass="success-label" wrapText="true"/>
+        <HBox alignment="CENTER"><ProgressIndicator fx:id="spinner" prefWidth="24" prefHeight="24"/></HBox>
+
+        <!-- View mode -->
+        <VBox fx:id="viewPane" styleClass="card" spacing="0" maxWidth="Infinity">
+            <padding><Insets topRightBottomLeft="24"/></padding>
+            <Label text="Personal Information" styleClass="section-title" style="-fx-padding: 0 0 16 0;"/>
+            <GridPane hgap="20" vgap="14">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="130"/>
+                    <ColumnConstraints hgrow="ALWAYS" fillWidth="true"/>
+                </columnConstraints>
+                <Label text="Full Name"    styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <Label fx:id="viewName"    styleClass="field-value" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Label text="Email"        styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Label fx:id="viewEmail"   styleClass="field-value" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Label text="Age"          styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <Label fx:id="viewAge"     styleClass="field-value" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                <Label text="Gender"       styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                <Label fx:id="viewGender"  styleClass="field-value" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <Label text="Role"         styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                <Label fx:id="viewRole"    styleClass="field-value" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                <Label text="Member Since" styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                <Label fx:id="viewJoined"  styleClass="field-value" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+            </GridPane>
+        </VBox>
+
+        <!-- Edit mode -->
+        <VBox fx:id="editPane" styleClass="card" spacing="14" visible="false" managed="false" maxWidth="Infinity">
+            <padding><Insets topRightBottomLeft="24"/></padding>
+            <Label text="Edit Information" styleClass="section-title"/>
+            <GridPane hgap="20" vgap="12">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="130"/>
+                    <ColumnConstraints hgrow="ALWAYS" fillWidth="true"/>
+                </columnConstraints>
+                <Label text="Full Name *" styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <TextField fx:id="editName"  styleClass="text-field-custom" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="280" maxWidth="Infinity"/>
+                <Label text="Email"       styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <TextField fx:id="editEmail" styleClass="text-field-custom" GridPane.columnIndex="1" GridPane.rowIndex="1" maxWidth="Infinity"/>
+                <Label text="Age"         styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <TextField fx:id="editAge"   styleClass="text-field-custom" GridPane.columnIndex="1" GridPane.rowIndex="2" maxWidth="Infinity"/>
+                <Label text="Gender"      styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                <ComboBox fx:id="editGender" styleClass="combo-custom" GridPane.columnIndex="1" GridPane.rowIndex="3" maxWidth="Infinity"/>
+            </GridPane>
+        </VBox>
+    </VBox>
+</ScrollPane>

@@ -1,0 +1,155 @@
+.container {
+  animation: fadeIn .4s ease both;
+}
+
+.pageHeader {
+  margin-bottom: 28px;
+}
+
+.filterTabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+  background: var(--slate-100);
+  padding: 4px;
+  border-radius: var(--r-lg);
+  width: fit-content;
+}
+
+.filterTab {
+  padding: 7px 18px;
+  border-radius: var(--r-md);
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  background: transparent;
+  color: var(--text-muted);
+  box-shadow: none;
+  transition: all var(--t-fast);
+}
+
+.filterTabActive {
+  background: var(--surface);
+  color: var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  padding: 60px;
+}
+
+.alertCard {
+  display: flex;
+  gap: 14px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  transition: background var(--t-fast);
+  animation: fadeUp .3s ease both;
+}
+
+.alertCardUnread {
+  background: rgba(0,109,119,.03);
+}
+
+.alertIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-md);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  position: relative;
+}
+
+.alertUnreadDot {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+  border: 2px solid var(--surface);
+}
+
+.alertContent {
+  flex: 1;
+}
+
+.alertMeta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 6;
+}
+
+.alertBadge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.alertBadgeNew {
+  font-size: 10px;
+}
+
+.alertMessage {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+  font-weight: 400;
+  margin: 0;
+}
+
+.alertMessageUnread {
+  font-weight: 500;
+}
+
+.alertDate {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 6;
+  margin-bottom: 0;
+}
+
+.markReadButton {
+  align-self: flex-start;
+  padding: 5px 12px;
+  border-radius: var(--r-sm);
+  border: 1.5px solid;
+  background: transparent;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all var(--t-fast);
+}
+
+.markReadButton:hover {
+  background: currentColor;
+  opacity: 0.12;
+}
+
+.emptyState {
+  padding: 40px;
+}
+
+@media (max-width: 768px) {
+  .filterTabs {
+    width: 100%;
+  }
+  
+  .filterTab {
+    flex: 1;
+    text-align: center;
+  }
+}

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.eswasthya.desktop.controller.DashboardController"
+            fitToWidth="true" styleClass="scroll-content">
+
+    <VBox spacing="22">
+        <Label text="Dashboard" styleClass="page-title"/>
+
+        <!-- Loading -->
+        <VBox fx:id="loadingBox" alignment="CENTER" spacing="12" prefHeight="200">
+            <ProgressIndicator prefWidth="40" prefHeight="40"/>
+            <Label text="Loading your health data…" styleClass="text-muted"/>
+        </VBox>
+        <Label fx:id="errorLabel" styleClass="error-label" wrapText="true"/>
+
+        <VBox fx:id="contentBox" spacing="22">
+            <!-- Stat cards row -->
+            <HBox spacing="14">
+                <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+                    <Label text="TOTAL RECORDS" styleClass="stat-label"/>
+                    <Label fx:id="totalRecordsLabel" text="—" styleClass="stat-value"/>
+                </VBox>
+                <VBox styleClass="stat-card,stat-card-alert" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+                    <Label text="UNREAD ALERTS" styleClass="stat-label"/>
+                    <Label fx:id="unreadAlertsLabel" text="—" styleClass="stat-value"/>
+                </VBox>
+                <VBox styleClass="stat-card,stat-card-green" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+                    <Label text="AVG BMI (30 DAYS)" styleClass="stat-label"/>
+                    <Label fx:id="avgBmiLabel" text="—" styleClass="stat-value"/>
+                </VBox>
+                <VBox styleClass="stat-card,stat-card-amber" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+                    <Label text="AVG GLUCOSE (30D)" styleClass="stat-label"/>
+                    <Label fx:id="avgGlucoseLabel" text="—" styleClass="stat-value"/>
+                    <Label text="mg/dL" styleClass="stat-unit"/>
+                </VBox>
+            </HBox>
+
+            <!-- Latest Snapshot -->
+            <VBox styleClass="card" spacing="14">
+                <padding><Insets topRightBottomLeft="20"/></padding>
+                <Label text="Latest Snapshot" styleClass="section-title"/>
+                <GridPane hgap="20" vgap="12">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="25" hgrow="ALWAYS" fillWidth="true"/>
+                        <ColumnConstraints percentWidth="25" hgrow="ALWAYS" fillWidth="true"/>
+                        <ColumnConstraints percentWidth="25" hgrow="ALWAYS" fillWidth="true"/>
+                        <ColumnConstraints percentWidth="25" hgrow="ALWAYS" fillWidth="true"/>
+                    </columnConstraints>
+                    <!-- BMI -->
+                    <VBox styleClass="metric-box" GridPane.columnIndex="0" GridPane.rowIndex="0" maxWidth="Infinity">
+                        <Label text="BMI" styleClass="metric-label"/>
+                        <Label fx:id="bmiValueLabel" text="—" styleClass="metric-value"/>
+                        <Label fx:id="bmiCategoryLabel" text="" styleClass="metric-category"/>
+                    </VBox>
+                    <!-- Blood Pressure -->
+                    <VBox styleClass="metric-box" GridPane.columnIndex="1" GridPane.rowIndex="0" maxWidth="Infinity">
+                        <Label text="BLOOD PRESSURE" styleClass="metric-label"/>
+                        <Label fx:id="bpValueLabel" text="—" styleClass="metric-value"/>
+                        <Label fx:id="bpCategoryLabel" text="" styleClass="metric-category"/>
+                    </VBox>
+                    <!-- Glucose -->
+                    <VBox styleClass="metric-box" GridPane.columnIndex="2" GridPane.rowIndex="0" maxWidth="Infinity">
+                        <Label text="GLUCOSE (FASTING)" styleClass="metric-label"/>
+                        <Label fx:id="glucoseValueLabel" text="—" styleClass="metric-value"/>
+                        <Label fx:id="glucoseCategoryLabel" text="" styleClass="metric-category"/>
+                    </VBox>
+                    <!-- Activity -->
+                    <VBox styleClass="metric-box" GridPane.columnIndex="3" GridPane.rowIndex="0" maxWidth="Infinity">
+                        <Label text="ACTIVITY LEVEL" styleClass="metric-label"/>
+                        <Label fx:id="activityLabel" text="—" styleClass="metric-value"/>
+                    </VBox>
+                </GridPane>
+                <!-- BMI bar -->
+                <VBox spacing="4">
+                    <Label text="BMI Scale (10 → 50)" styleClass="metric-label"/>
+                    <ProgressBar fx:id="bmiBar" maxWidth="Infinity" prefHeight="10" progress="0"/>
+                    <HBox>
+                        <Label text="Underweight" style="-fx-text-fill:#3b82f6; -fx-font-size:10;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label text="Normal" style="-fx-text-fill:#2a9d8f; -fx-font-size:10;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label text="Overweight" style="-fx-text-fill:#f59e0b; -fx-font-size:10;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label text="Obese" style="-fx-text-fill:#dc2626; -fx-font-size:10;"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+
+            <!-- Charts row -->
+            <HBox spacing="14">
+                <VBox styleClass="card" HBox.hgrow="ALWAYS" spacing="8" maxWidth="Infinity">
+                    <padding><Insets topRightBottomLeft="16"/></padding>
+                    <Label text="BMI Trend" styleClass="section-title"/>
+                    <LineChart fx:id="bmiChart" prefHeight="200" animated="false" legendVisible="false">
+                        <xAxis><CategoryAxis label="Date"/></xAxis>
+                        <yAxis><NumberAxis label="BMI" lowerBound="10" upperBound="45" tickUnit="5" autoRanging="false"/></yAxis>
+                    </LineChart>
+                </VBox>
+                <VBox styleClass="card" HBox.hgrow="ALWAYS" spacing="8" maxWidth="Infinity">
+                    <padding><Insets topRightBottomLeft="16"/></padding>
+                    <Label text="Glucose Trend (mg/dL)" styleClass="section-title"/>
+                    <LineChart fx:id="glucoseChart" prefHeight="200" animated="false" legendVisible="false">
+                        <xAxis><CategoryAxis label="Date"/></xAxis>
+                        <yAxis><NumberAxis label="mg/dL" lowerBound="40" upperBound="200" tickUnit="20" autoRanging="false"/></yAxis>
+                    </LineChart>
+                </VBox>
+                <VBox styleClass="card" HBox.hgrow="ALWAYS" spacing="8" maxWidth="Infinity">
+                    <padding><Insets topRightBottomLeft="16"/></padding>
+                    <Label text="Activity Distribution" styleClass="section-title"/>
+                    <BarChart fx:id="activityChart" prefHeight="200" animated="false" legendVisible="false">
+                        <xAxis><CategoryAxis/></xAxis>
+                        <yAxis><NumberAxis autoRanging="true"/></yAxis>
+                    </BarChart>
+                </VBox>
+            </HBox>
+        </VBox>
+    </VBox>
+</ScrollPane>
